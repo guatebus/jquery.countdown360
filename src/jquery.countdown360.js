@@ -37,7 +37,7 @@
     },
 
     addSeconds: function (value) {
-      var secondsElapsed = Math.round((new Date().getTime() - this.startedAt.getTime())/1000);
+      var secondsElapsed = this.getSecondsElapsed();
       if (this.settings.startOverAfterAdding) {
           this.settings.seconds = this._secondsLeft(secondsElapsed) + parseInt(value);
           this.start();
@@ -56,6 +56,10 @@
     stop: function (cb) {
       clearInterval(this.interval);
       if (cb) { cb(); }
+    },
+
+    getSecondsElapsed: function () {
+      return Math.round((new Date().getTime() - this.startedAt.getTime())/1000);
     },
 
     _init: function () {
@@ -126,7 +130,7 @@
     },
 
     _draw: function () {
-      var secondsElapsed = Math.round((new Date().getTime() - this.startedAt.getTime())/1000),
+      var secondsElapsed = this.getSecondsElapsed(),
           endAngle = (Math.PI*3.5) - (((Math.PI*2)/this.settings.seconds) * secondsElapsed);
       this._clearRect();
       this._drawCountdownShape(Math.PI*3.5, false);
