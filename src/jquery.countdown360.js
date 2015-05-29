@@ -30,7 +30,7 @@
 
     extendTimer: function (value) {
       var seconds = parseInt(value),
-          secondsElapsed = Math.round((new Date().getTime() - this.startedAt.getTime())/1000);
+          secondsElapsed = this.getSecondsElapsed();
       if ((this._secondsLeft(secondsElapsed) + seconds) <= this.settings.seconds) {
         this.startedAt.setSeconds(this.startedAt.getSeconds() + parseInt(value));
       }
